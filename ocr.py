@@ -25,7 +25,7 @@ def main_loop():
         frame = imutils.resize(frame, width=600, height=400)
 
         blurred = cv2.GaussianBlur(frame, (3,3), 0)
-        hsv = cvs.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
         masked = cv2.inRange(hsv, light_black, black)
         dilated = cv2.dilate(masked, kernel, iterations=1)
