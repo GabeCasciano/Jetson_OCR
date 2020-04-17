@@ -29,7 +29,7 @@ def main_loop():
 
         masked = cv2.inRange(hsv, light_black, black)
         dilated = cv2.dilate(masked, kernel, iterations=1)
-        erroded = cv2.errode(dilated, kernel, iterations=1)
+        erroded = cv2.erode(dilated, kernel, iterations=1)
 
         cv2.imshow("Origianl", frame)
         cv2.imshow("Masked", masked)
