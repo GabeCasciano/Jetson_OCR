@@ -7,15 +7,15 @@ upper = (255, 255, 10)
 
 IMAGE = 'char_set_1.jpg' # put the name of your file here
 
-kernel = np.ones((5,5), np.uint8)
+kernel = np.ones((2,2), np.uint8)
 
 def main_loop():
 
     image = cv2.imread(IMAGE)
-    frame = imutils.resize(image, width=600, height=400)
+    # frame = imutils.resize(image, width=600, height=400)
 
-    blurred = cv2.GaussianBlur(frame, (3,3), 0)
-    hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
+    # blurred = cv2.GaussianBlur(frame, (3,3), 0)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     masked = cv2.inRange(hsv, lower, upper)
     dilated = cv2.dilate(masked, kernel, iterations=1)
