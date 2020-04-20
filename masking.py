@@ -5,7 +5,7 @@ import imutils
 lower = (0, 0, 0)
 upper = (255, 255, 10)
 
-IMAGE = 'char_set_1.jpg'
+IMAGE = 'char_set_1.jpg' # put the name of your file here
 
 kernel = np.ones((5,5), np.uint8)
 
