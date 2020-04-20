@@ -26,12 +26,12 @@ def main_loop():
     cv2.imshow("filtered", erroded)
 
     key = cv2.waitKey(1) & 0xFF
-
     while key != ord("q"):
-        print("Done")
-        break
+        key = cv2.waitKey(1) & 0xFF
 
+    print("Done")
     cv2.destroyAllWindows()
+
     return
 
 main_loop()
