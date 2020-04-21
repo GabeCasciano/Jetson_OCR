@@ -7,8 +7,8 @@ upper = (255, 255, 10)
 
 IMAGE = 'char_set_1.jpg' # put the name of your file here
 
-kernel = np.ones((2,2), np.uint8)
-
+small_kernel = np.ones((2,2), np.uint8) # can adjust this
+large_kernel = np.ones((4,4), np.uint8)
 def main_loop():
 
     image = cv2.imread(IMAGE)
@@ -18,8 +18,10 @@ def main_loop():
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     masked = cv2.inRange(hsv, lower, upper)
-    dilated = cv2.dilate(masked, kernel, iterations=1)
-    erroded = cv2.erode(dilated, kernel, iterations=1)
+
+    #closing
+    dilated = cv2.dilate(masked, small_kernel, iterations=2)
+    erroded = cv2.erode(dilated, small_kernel, iterations=3)
 
     cv2.imshow("Original", image)
     cv2.imshow("Masked", masked)
