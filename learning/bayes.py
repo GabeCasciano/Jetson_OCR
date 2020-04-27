@@ -1,6 +1,8 @@
 import csv
 import numpy as np
 import math
+import matplotlib.pyplot as plt
+
 
 ## Extracts our dataset from the csv
 def extract_dataset(dataset):
@@ -28,7 +30,7 @@ def seperate_dataset(dataset):
     return setosa, versicolor, virginica, length
 
 def calculate_stats(setosa, versicolor, virginica):
-    len_setosa = len(setosa);len_versi = len(versicolor);len_virginica = len(virginica)
+    len_setosa = len(setosa); len_versi = len(versicolor); len_virginica = len(virginica)
     len_data = len_setosa + len_versi + len_virginica
 
     setosa = np.array(setosa, np.float)
@@ -75,12 +77,33 @@ def main():
     training_set = .70
     testing_set = 1 - training_set
 
-
     setosa, versicolor, virginica, data_length = seperate_dataset(extract_dataset(dataset_location))
 
     print(setosa)
     print(versicolor)
     print(virginica)
+
+    # Plot sepal len vs width
+    plt.figure(1)
+    plt.scatter(np.array(setosa)[:,0], np.array(setosa)[:,1])
+    plt.scatter(np.array(versicolor)[:,0], np.array(versicolor)[:,1])
+    plt.scatter(np.array(virginica)[:,0], np.array(virginica)[:,1])
+    plt.ylabel("Sepal Length")
+    plt.xlabel("Sepal Width")
+    plt.title("Sepal len vs width")
+    plt.legend(["Setosa", "Versicolor", "Virginica"])
+
+    plt.figure(2)
+    plt.scatter(np.array(setosa)[:,2], np.array(setosa)[:,3])
+    plt.scatter(np.array(versicolor)[:,2], np.array(versicolor)[:,3])
+    plt.scatter(np.array(virginica)[:,2], np.array(virginica)[:,3])
+    plt.ylabel("Pedal Length")
+    plt.xlabel("Pedal Width")
+    plt.title("Pedal len vs width")
+    plt.legend(["Setosa", "Versicolor", "Virginica"])
+
+
+    plt.show()
 
     return
 
