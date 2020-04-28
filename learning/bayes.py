@@ -145,7 +145,10 @@ def main():
 
     #testing on setosa
     out = calculate_discriminant(setosa_test_set[3], prior_prob, mean, standard_dev)
-    print(out)
+    print("S mean: ", mean[0])
+    print("S standard deviation: ", standard_dev[0])
+    print("x: ", setosa_test_set[0])
+    print(out[0:4])
 
     return
 
