@@ -13,4 +13,4 @@ def ocr(img):
         api.SetImageFile(img)
         text = api.GetUTF8Text()
         return text
-print(ocr('ocrimage.jpg'))
+print(ocr('testimg.jpg'))
