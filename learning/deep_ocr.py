@@ -13,4 +13,3 @@ def ocr(img):
         api.SetImageFile(img)
         text = api.GetUTF8Text()
 
-print(ocr(toBW("file.jpg")))
