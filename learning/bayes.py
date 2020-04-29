@@ -181,8 +181,6 @@ def main():
     out2 = calculate_discriminant(versicolor_test_set[4], prior_prob, mean, standard_dev)
     out3 = calculate_discriminant(virginica_test_set[5], prior_prob, mean, standard_dev)
 
-    plots(setosa, versicolor, virginica)
-
     print("Setosa")
     print("mean: ", mean[0])
     print("VersiColor")
@@ -198,6 +196,8 @@ def main():
     print("G(x) 2: %s %s " % (out2[0:4], out2[8:12]))
     print("G(x) 3: %s %s " % (out3[4:8], out3[8:12]))
     print(classifier(out2))
+
+    plots(setosa, versicolor, virginica)
 
     return
 
