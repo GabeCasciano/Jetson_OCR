@@ -84,11 +84,10 @@ def calculate_discriminant(x, PriorProb, means, standard_devs):
         PostProb_versi.append( PriorProb[1] * CondProb_versi[i] / (PriorProb[0] * CondProb_setosa[i] + PriorProb[1] * CondProb_versi[i] + PriorProb[1] * CondProb_virginica[i]) )
         PostProb_virginica.append( PriorProb[2] * CondProb_virginica[i] / (PriorProb[0] * CondProb_setosa[i] + PriorProb[1] * CondProb_versi[i] + PriorProb[1] * CondProb_virginica[i]) )
 
-    print(CondProb_setosa)
     # Discriminant
     val = 0
-    for i in range(0, 4):
-        for j in range(0,3):
+    for j in range(0, 3):
+        for i in range(0, 4):
             if j == 0: # s vs v
                 val = PostProb_setosa[i] - PostProb_versi[i]
             elif j == 1:# s vs vi
@@ -121,8 +120,41 @@ def plots(setosa, versicolor, virginica):
     plt.legend(["Setosa", "Versicolor", "Virginica"])
 
     plt.show()
-
     return
+
+def classifier(out):
+
+    setosa_features = [out[0:4], out[4:8]]
+    versi_features = [out[0:4], out[8:12]]
+    virginica_features = [out[4:8], out[8:12]]
+
+    setosa_sum = 0
+    other_sum = 0
+
+    for i in setosa_features:
+        for j in i:
+            if(j > 0):
+                setosa_sum += 1
+            else:
+                setosa_sum -= 1
+
+    if(setosa_sum <= 0):
+        for i in versi_features[1]:
+                if (i > 0):
+                    other_sum += 1
+
+        for i in virginica_features[1]:
+                if (i < 0):
+                    other_sum -= 1
+
+    if setosa_sum >= 3:
+        return 1
+    elif other_sum >= 2:
+        return 2
+    elif other_sum <= -2:
+        return 3
+    else:
+        return -1
 
 def main():
     dataset_location = 'iris.data'
@@ -141,14 +173,31 @@ def main():
     versicolor_test_set = versicolor[math.ceil(training_set * len(versicolor)) : len(versicolor)]
     virginica_test_set = virginica[math.ceil(training_set * len(virginica)) : len(virginica)]
 
+    # calculating the statistics
     prior_prob, mean, standard_dev = calculate_stats(setosa_training_set, versicolor_training_set, virginica_training_set)
 
-    #testing on setosa
-    out = calculate_discriminant(setosa_test_set[3], prior_prob, mean, standard_dev)
-    print("S mean: ", mean[0])
-    print("S standard deviation: ", standard_dev[0])
-    print("x: ", setosa_test_set[0])
-    print(out[0:4])
+    # testing the dataset and classifier
+    out1 = calculate_discriminant(setosa_test_set[3], prior_prob, mean, standard_dev)
+    out2 = calculate_discriminant(versicolor_test_set[4], prior_prob, mean, standard_dev)
+    out3 = calculate_discriminant(virginica_test_set[5], prior_prob, mean, standard_dev)
+
+    plots(setosa, versicolor, virginica)
+
+    print("Setosa")
+    print("mean: ", mean[0])
+    print("VersiColor")
+    print("mean: ", mean[1])
+    print("Virginica")
+    print("mean: ", mean[2])
+    print()
+    print("setosa test: ", setosa_test_set[3])
+    print("versi test: ", versicolor_test_set[4])
+    print("virginica test: ", virginica_test_set[5])
+    print()
+    print("G(x) 1: %s %s " % (out1[0:4], out1[4:8]))
+    print("G(x) 2: %s %s " % (out2[0:4], out2[8:12]))
+    print("G(x) 3: %s %s " % (out3[4:8], out3[8:12]))
+    print(classifier(out2))
 
     return
 
