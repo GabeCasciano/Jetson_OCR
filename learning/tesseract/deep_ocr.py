@@ -15,4 +15,4 @@ def ocr_jet(img):
         text = api.GetUTF8Text()
         return text
 
-print(ocr_win('ocrimage.jpg'))
+print(ocr_win('char_set_1.jpg'))
