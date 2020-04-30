@@ -10,8 +10,7 @@ def toBW(img):
 
 def ocr(img):
     with PyTessBaseAPI () as api:
-        image = Image.open(img)
-        api.SetImageFile(image)
+        api.SetImageFile(img)
         text = api.GetUTF8Text()
         return text
 print(ocr('ocrimage.jpg'))
