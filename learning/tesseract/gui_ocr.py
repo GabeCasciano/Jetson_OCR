@@ -2,7 +2,7 @@ import deep_ocr as docr
 import cv2
 import platform
 import imutils
-
+import sys
 from PIL import Image as Img
 from tkinter import Tk, Label, Button, Image, Canvas
 
