@@ -21,29 +21,43 @@ class gui:
         self.capture_button = Button(tk, text="capture img", command=self.getTextInImage) # create and set the button for capturing
         self.capture_button.pack() # pack button into the GUI
 
+    # cv2 init for the video stream, determines what system we are on
     def init_camera_stream(self):
+        # if we are running on jetson
         if self.running_on_jetson_nano() == True:
+            # generate jetson camera feed
             self.vs = cv2.VideoCapture(self.get_jetson_gstreamer_source(), cv2.CAP_GSTREAMER)
         else:
+            # generate normal camera feed
             self.vs = cv2.VideoCapture(0)
         return
 
+    # takes a single image from the video stream
     def getImage(self):
-        ret, im = self.vs.read()
+        ret, im = self.vs.read() # read the videostream
         im = imutils.resize(im, width=400, height=400)  # resize the image
-        cv2.destroyAllWindows()
-        cv2.imshow("capture", im)
-        return Img.fromarray(im)
+        cv2.destroyAllWindows() # destroys all cv2 windows
 
+        im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY) # convert image to greyscale
+
+        cv2.imshow("capture", im) # shows the captured frame
+        return Img.fromarray(im) # return the captured frame
+
+    #Performs ocr on an image
     def getTextInImage(self):
-        img = self.getImage()
-        text = docr.ocr_win_cv2(img)
-        print(text)
+        img = self.getImage() # calls
+
+        if self.running_on_jetson_nano() == True:
+            text = docr.ocr_jet_cv2(img) # performs ocr on image
+        else:
+            text = docr.ocr_win_cv2(img)
+        print(text) # prints the ocr text
         return
 
     def updateVidSetream(self):
         ret, im = self.vs.read()
-        cv2.imshow("Camera Feed", im)
+        im = imutils.resize(im, width=400, height=400)  # resize the image
+        cv2.imshow("Camera Feed", im) # display the videostream
         return
 
     def running_on_jetson_nano(self):

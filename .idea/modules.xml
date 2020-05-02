@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../Doorbell/.idea/Doorbell.iml" filepath="$PROJECT_DIR$/../../Doorbell/.idea/Doorbell.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Jetson_OCR.iml" filepath="$PROJECT_DIR$/.idea/Jetson_OCR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TennisBallTracker/.idea/TennisBallTracker.iml" filepath="$PROJECT_DIR$/../TennisBallTracker/.idea/TennisBallTracker.iml" />
     </modules>
   </component>
 </project>
