@@ -64,7 +64,7 @@ class gui:
         return platform.machine() == "aarch64"
 
     def get_jetson_gstreamer_source(self, capture_width=1280, capture_height=720, display_width=640, display_height=480,
-                                    framerate=60, flip_method=2):
+                                    framerate=30, flip_method=2):
         """
         Return an OpenCV-compatible video source description that uses gstreamer to capture video from the camera on a Jetson Nano
         """
