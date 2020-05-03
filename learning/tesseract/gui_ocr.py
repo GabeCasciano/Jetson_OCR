@@ -70,10 +70,10 @@ class gui:
         """
         return (
                 f'nvarguscamerasrc ! video/x-raw(memory:NVMM), ' +
-                f'width=(int){capture_width}, height=(int){capture_height}, ' +
-                f'format=(string)NV12, framerate=(fraction){framerate}/1 ! ' +
-                f'nvvidconv flip-method={flip_method} ! ' +
-                f'video/x-raw, width=(int){display_width}, height=(int){display_height}, format=(string)BGRx ! ' +
+                f'width=(int){1280}, height=(int){720}, ' +
+                f'format=(string)NV12, framerate=(fraction){30}/1 ! ' +
+                f'nvvidconv flip-method={2} ! ' +
+                f'video/x-raw, width=(int){640}, height=(int){480}, format=(string)BGRx ! ' +
                 'videoconvert ! video/x-raw, format=(string)BGR ! appsink'
         )
 
