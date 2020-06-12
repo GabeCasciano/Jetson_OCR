@@ -41,3 +41,4 @@ for i in range(0, 10):
     ret, img = vs.read()
     cv2.imwrite(f"./pictures/picture_{i}.jpg", img)
     time.sleep(0.2)
+    print(f"Taking picture {i}")
